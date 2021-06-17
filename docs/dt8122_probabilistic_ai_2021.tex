@@ -1,0 +1,168 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[USenglish]{babel}
+\usepackage{styles/ntnu}
+\usepackage[numbers]{natbib}
+\usepackage[dvips]{color}
+\usepackage{url}
+\usepackage{todonotes}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+
+%%% DOCUMENT ---------------------------------------------------------------------------------------
+
+\begin{document}
+
+\title{Probabilistic AI}{DT8122 \textbf{Project Assignment --- Uncertainty Quantification}}
+\author{\textcolor{blue}{\href{mailto:dt8122@idi.ntnu.no}{dt8122@idi.ntnu.no}}}
+\begin{center}
+\vspace{-0.5cm}
+Summer 2021
+\end{center}
+
+%---------------------------------------------------------------------------------------------------
+
+\section{Introduction}\label{sec:Introduction}
+Uncertainty modeling and quantification is relevant in many real world applications. One possible
+approach to this task is to use Bayesian methods in order to obtain the probability density of the
+quantities of interest and use the obtained full densities to compute other quantities of interest
+such as prediction intervals (PI). Traditionally, we would resort to linear models in order to have
+a computationally feasible solution to the inference problem. However, with the recent advances in
+Probabilistic AI, we are able to extend the space of possible models with non-linear models. The
+objective of this project assignment is to explore some of those techniques in a set of prediction
+tasks.
+
+\section{Task}\label{sec:Task}
+The task concerns implementation and evaluation of probabilistic deep learning methods for
+uncertainty quantification. First, you are asked to implement two deep generative modeling
+techniques (Section~\ref{sec:Models}). We then ask you to identify shortcomings or limitations of
+your chosen techniques. Finally, we ask you to implement a non-trivial possible improvement for one
+of your chosen methods (Section~\ref{sec:Research}).
+
+Each part should be accompanied by empirical evaluation (Section~\ref{sec:Evaluation}) using the
+provided datasets (Section~\ref{sec:Datasets}) and discussion of the results. All this should be
+compiled into a final report (max. 10 pages) accompanied with the code to reproduce your results.
+
+\subsection{Models}\label{sec:Models}
+You are expected to implement two deep probabilistic regression models for uncertainty estimation
+and use these model to generate prediction intervals and point predictions. For that you have to
+choose two of the following techniques:
+
+\begin{enumerate}
+    \item Structured and Efficient Variational Deep Learning with Matrix Gaussian
+          Posteriors~\citep{pmlr-v48-louizos16}
+    \item Multiplicative Normalizing Flows~\citep{pmlr-v70-louizos17a}
+    \item A Simple Baseline for Bayesian Uncertainty in Deep Learning~\citep{NEURIPS2019_118921ef}
+    \item Noisy Natural Gradient as Variational Inference~\citep{pmlr-v80-zhang18l} (Either Adam or
+          K-FAC.)
+\end{enumerate}
+
+\subsection{Research of Shortcomings, Limitations and Possible Improvements}\label{sec:Research}
+Discuss the shortcomings or limitations of the two approaches you have chosen to implement. Suggest
+and implement at least one possible improvement. This improvement should be non-trivial, so
+hyperparameter optimization does not count as a possible improvement. Justify your modification,
+compare with previous results, and report your findings.
+
+This part of your work is what we will emphasize the most when assessing your submission. We do not
+necessarily expect you to come up with a new publishable method, but we do expect your implemented
+change to be non-trivial.
+
+\subsection{Datasets}\label{sec:Datasets}
+The provided datasets are the same as in \citet{pmlr-v80-zhang18l}, and \citet{pmlr-v48-louizos16}.
+All datasets have target values (\(y\)) placed in the last column. Ensure that your implementation
+can run on all datasets (see also Section~\ref{sec:SubmissionRequirements} for required command line
+interface)
+
+\subsection{Evaluation}\label{sec:Evaluation}
+For evaluation you will use the last 10\% of rows in the dataset as the test set. For both of your
+implemented methods, as well as your modified method, measure and report the following metrics on
+the test set:
+
+\begin{itemize}
+    \item Root mean square error (RMSE),
+    \item Prediction interval coverage probability (PICP) for 95\% PI,
+    \item Mean prediction interval width (MPIW) for 95\% PI\@.
+\end{itemize}
+
+\noindent
+Following the notation from~\citet{pmlr-v80-pearce18a},  let \(\mathbf{x}_{i} \in
+\mathbb{R}^{D}\) be the \(i\)-th \(D\) dimensional input features corresponding to target observation
+\(y_i\), where \(1 \leq i \leq n\) for \(n\) data points. The predicted lower and upper bounds of PI
+are denoted by \(\hat{y}_{Li}\) and \(\hat{y}_{Ui}\). The PI is then defined as
+%
+\begin{equation*}
+P\left(\hat{y}_{L i} \leq y_{i} \leq \hat{y}_{U i}\right) \geq \gamma,
+\end{equation*}
+%
+where \(\gamma\) is \(0.95\) for 95\% prediction interval.
+
+\noindent
+PICP is calculated as following:
+%
+\begin{equation*}
+k_i =
+\begin{cases}
+  1 & \text{if}\ \hat{y}_{Li} \leq y_{i} \leq \hat{y}_{Ui}; \\
+  0 & \text{otherwise},
+\end{cases}
+\end{equation*}
+%
+\begin{equation*}
+PICP = \frac{1}{n}\sum_{i=1}^{n} k_i.
+\end{equation*}
+%
+\noindent
+MPIW is calculated as following:
+%
+\begin{equation*}
+MPIW = \frac{1}{n}\sum_{i=1}^{n} \hat{y}_{Ui} - \hat{y}_{Li}.
+\end{equation*}
+
+\section{Submission Requirements}\label{sec:SubmissionRequirements}
+We expect you to submit the following:
+
+\begin{itemize}
+    \item \textbf{Code} with your implementation in Python using Pyro/PyTorch or TensorFlow
+                        (Probability) of two of the four techniques of uncertainty modeling with
+                        neural networks.
+        \begin{itemize}
+            \item Your deliverable should contain a \emph{main.py} file that can be executed with the
+                  following command and arguments:\\
+                  \textbf{python -m main}
+                  \begin{description}
+                      \item[\textbf{-{-}dataset}] accepts any string matching one of the supplied
+                                                  datasets
+                      \item[\textbf{-{-}method}] accepts integers 0--4. 0 is your modified method
+                        and 1--4 follows the same order as listed in Section~\ref{sec:Models}. For
+                        the methods not implemented it should return a \emph{NotImplementedError}.
+                  \end{description}
+                  For instance, use
+                  \begin{quotation}
+                      \textbf{python -m main -{-}dataset ./wine.txt -{-}method 3}
+                  \end{quotation}
+                  to run \citet{NEURIPS2019_118921ef}'s method on data stored in \emph{./wine.txt}.
+
+                  You can choose to accept more arguments, however, all other parameters should have
+                  appropriate default values such that the script can be executed with only the
+                  arguments specified with default values per dataset the script should reproduce
+                  results in the paper. The script should train a model on the training-portion of
+                  the specified dataset, and return the RMSE, PICP, and MPIW values for the test
+                  portion. If required, your script can have load pre-trained models that you also
+                  supply.
+            \item You should make sure the code is not dependent on a system specific configuration. To make sure that we can execute your code, provide a \textsc{Pipfile} or \textsc{requirements.txt} file.
+        \end{itemize}
+    \item \textbf{Report} that should include your model choices, inference methods, results from
+                          empirical evaluation, findings and discussion. Max. 10 pages.
+\end{itemize}
+
+All assignment artifacts are to be sent as a single ZIP file to the email address
+\href{mailto:dt8122@idi.ntnu.no}{dt8122@idi.ntnu.no}. The deadline is August 18th 2021 AoE
+(Anywhere on Earth).
+
+%---------------------------------------------------------------------------------------------------
+
+\bibliographystyle{rusnat}
+\bibliography{bibliography}
+
+\end{document}
+
+%%% END OF DOCUMENT --------------------------------------------------------------------------------

@@ -1,0 +1,25 @@
+### LaTeX ###
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+*.bbl
+*.blg
+*.fdb_latexmk
+*.synctex.gz
+*.dvi
+.*.lb
+
+
+### VisualStudioCode ###
+.vscode
+*.code-workspace
+.history
+.ionide

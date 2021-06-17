@@ -1,0 +1,107 @@
+@InProceedings{pmlr-v70-louizos17a,
+  title     = 	 {Multiplicative Normalizing Flows for Variational {B}ayesian Neural Networks},
+  author    = 	 {Christos Louizos and Max Welling},
+  booktitle = 	 {Proceedings of the 34th International Conference on Machine Learning},
+  pages     = 	 {2218--2227},
+  year      = 	 {2017},
+  editor    = 	 {Doina Precup and Yee Whye Teh},
+  volume    = 	 {70},
+  series    = 	 {Proceedings of Machine Learning Research},
+  address   = 	 {International Convention Centre, Sydney, Australia},
+  month     = 	 {06--11 Aug},
+  publisher = 	 {PMLR},
+  pdf       = 	 {http://proceedings.mlr.press/v70/louizos17a/louizos17a.pdf},
+  url       = 	 {http://proceedings.mlr.press/v70/louizos17a.html}
+}
+
+@InProceedings{pmlr-v80-zhang18l,
+  title     = 	 {Noisy Natural Gradient as Variational Inference},
+  author    =    {Zhang, Guodong and Sun, Shengyang and Duvenaud, David and Grosse, Roger},
+  booktitle = 	 {Proceedings of the 35th International Conference on Machine Learning},
+  pages     = 	 {5852--5861},
+  year      = 	 {2018},
+  editor    = 	 {Dy, Jennifer and Krause, Andreas},
+  volume    = 	 {80},
+  series    = 	 {Proceedings of Machine Learning Research},
+  month     = 	 {10--15 Jul},
+  publisher =    {PMLR},
+  pdf       = 	 {http://proceedings.mlr.press/v80/zhang18l/zhang18l.pdf},
+  url       = 	 {http://proceedings.mlr.press/v80/zhang18l.html},
+  abstract  = 	 {Variational Bayesian neural nets combine the flexibility of deep learning with
+                  Bayesian uncertainty estimation. Unfortunately, there is a tradeoff between cheap
+                  but simple variational families (e.g.&nbsp;fully factorized) or expensive and
+                  complicated inference procedures. We show that natural gradient ascent with
+                  adaptive weight noise implicitly fits a variational posterior to maximize the
+                  evidence lower bound (ELBO). This insight allows us to train full-covariance,
+                  fully factorized, or matrix-variate Gaussian variational posteriors using noisy
+                  versions of natural gradient, Adam, and K-FAC, respectively, making it possible to
+                  scale up to modern-size ConvNets. On standard regression benchmarks, our noisy
+                  K-FAC algorithm makes better predictions and matches Hamiltonian Monte Carlo’s
+                  predictive variances better than existing methods. Its improved uncertainty
+                  estimates lead to more efficient exploration in active learning, and intrinsic
+                  motivation for reinforcement learning.
+                  }
+}
+
+@InProceedings{pmlr-v48-louizos16,
+  title     = {Structured and Efficient Variational Deep Learning with Matrix Gaussian Posteriors},
+  author    = {Louizos, Christos and Welling, Max},
+  booktitle = {Proceedings of The 33rd International Conference on Machine Learning},
+  pages     = {1708--1716},
+  year      = {2016},
+  editor    = {Balcan, Maria Florina and Weinberger, Kilian Q.},
+  volume    = {48},
+  series    = {Proceedings of Machine Learning Research},
+  address   = {New York, New York, USA},
+  month     = {20--22 Jun},
+  publisher = {PMLR},
+  pdf       = {http://proceedings.mlr.press/v48/louizos16.pdf},
+  url       = { http://proceedings.mlr.press/v48/louizos16.html },
+  abstract  = {We introduce a variational Bayesian neural network where the parameters are governed
+               via a probability distribution on random matrices. Specifically, we employ a matrix
+               variate Gaussian (Gupta & Nagar ’99) parameter posterior distribution where we
+               explicitly model the covariance among the input and output dimensions of each layer.
+               Furthermore, with approximate covariance matrices we can achieve a more efficient way
+               to represent those correlations that is also cheaper than fully factorized parameter
+               posteriors. We further show that with the “local reprarametrization trick" (Kingma &
+               Welling ’15) on this posterior distribution we arrive at a Gaussian Process
+               (Rasmussen ’06) interpretation of the hidden units in each layer and we, similarly
+               with (Gal & Ghahramani ’15), provide connections with deep Gaussian processes. We
+               continue in taking advantage of this duality and incorporate “pseudo-data” (Snelson &
+               Ghahramani ’05) in our model, which in turn allows for more efficient posterior
+               sampling while maintaining the properties of the original model. The validity of the
+               proposed approach is verified through extensive experiments.
+               }
+}
+
+@inproceedings{NEURIPS2019_118921ef,
+ author    = {Maddox, Wesley J and Izmailov, Pavel and Garipov, Timur and Vetrov, Dmitry P and
+              Wilson, Andrew Gordon},
+ booktitle = {Advances in Neural Information Processing Systems},
+ editor    = {H. Wallach and H. Larochelle and A. Beygelzimer and F. d\textquotesingle Alch\'{e}-Buc
+              and E. Fox and R. Garnett},
+ pages     = {},
+ publisher = {Curran Associates, Inc.},
+ title     = {A Simple Baseline for Bayesian Uncertainty in Deep Learning},
+ url       = {https://proceedings.neurips.cc/paper/2019/file/
+              118921efba23fc329e6560b27861f0c2-Paper.pdf},
+ volume    = {32},
+ year      = {2019}
+}
+
+@InProceedings{pmlr-v80-pearce18a,
+  title     = 	 {High-Quality Prediction Intervals for Deep Learning: A Distribution-Free,
+                  Ensembled Approach},
+  author    = 	 {Pearce, Tim and Brintrup, Alexandra and Zaki, Mohamed and Neely, Andy},
+  booktitle = 	 {Proceedings of the 35th International Conference on Machine Learning},
+  pages     = 	 {4075--4084},
+  year      = 	 {2018},
+  editor    = 	 {Dy, Jennifer and Krause, Andreas},
+  volume    = 	 {80},
+  series    = 	 {Proceedings of Machine Learning Research},
+  address   = 	 {Stockholmsmässan, Stockholm Sweden},
+  month     = 	 {10--15 Jul},
+  publisher = 	 {PMLR},
+  pdf       = 	 {http://proceedings.mlr.press/v80/pearce18a/pearce18a.pdf},
+  url       = 	 {http://proceedings.mlr.press/v80/pearce18a.html}
+}
